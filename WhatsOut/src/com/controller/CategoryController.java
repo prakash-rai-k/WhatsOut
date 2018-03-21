@@ -24,6 +24,7 @@ public class CategoryController extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("Here" + request.getParameter("category"));
