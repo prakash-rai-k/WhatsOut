@@ -112,6 +112,7 @@ body{
 /* removing margins in panel-posts */
 .panel-posts{
     margin-bottom: 0px;
+        clear: both;
 }
 
 /* adjusting line height */
@@ -234,5 +235,19 @@ body{
     font-weight: normal;
 }
 
+/**/
+.btn-create-event{
+	float:right;
+	margin-bottom: 20px;
+	clear:both;
+}
 
+.dynamic-div{
+	width:100%;
+}
+
+/*hide create form at beginning*/
+#create-event{
+	display:none;
+}
 

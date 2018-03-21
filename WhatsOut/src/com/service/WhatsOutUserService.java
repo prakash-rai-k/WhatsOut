@@ -23,4 +23,8 @@ public class WhatsOutUserService {
 	public boolean registerUser(WhatsOutUser wouser) {
 		return userDao.insert(wouser);
 	}
+	
+	public WhatsOutUser getUserBy(String username) {
+		return userDao.findBy(username);
+	}
 }

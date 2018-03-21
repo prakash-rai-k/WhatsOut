@@ -1,23 +1,30 @@
 package com.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
+
+import com.dao.EventCategoryDao;
+import com.model.EventCategory;
 
 public class CategoryService {
-	private List<String> categoryList;
+	private EventCategoryDao eventCategoryDao;
 
 	public CategoryService() {
-		this.categoryList = new ArrayList<>();
+		eventCategoryDao=new EventCategoryDao();
 	}
 
-	public List<String> getCategoryList() {
-		categoryList.add("Sports");
-		categoryList.add("Festival");
-		categoryList.add("Cinema");
-		categoryList.add("Music");
-		categoryList.add("Photography");
-		return categoryList;
+	public List<EventCategory> getCategoryList() {
+		return eventCategoryDao.findAll();
+	}
+	
+	public void addCategory(EventCategory category) {
+		System.out.println("Category" + category);
+		if(!this.getCategoryList().contains(category)) {			
+			eventCategoryDao.insert(category);
+		}
+	}
+	
+	public List<EventCategory> getCategory(int id){
+		return eventCategoryDao.findAll();
 	}
 
 }

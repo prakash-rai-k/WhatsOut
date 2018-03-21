@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,18 +46,23 @@ public class SignupController extends HttpServlet {
 			String state = request.getParameter("state");
 			String userName =  request.getParameter("username");
 			String password = request.getParameter("password");
-			System.out.println("Password : " + password);
+			
 			//String password = Base64.encode(request.getParameter("password").getBytes()).toString();
 			WhatsOutUser currentUser = new WhatsOutUser(0,userName, password, firstName, lastName, middleName,
 					email,phone,"", LocalDate.now(),new AddressService().getAddress(state, city));
 			
-			//Register new User
-			if((new WhatsOutUserService()).registerUser(currentUser)) {
-				response.sendRedirect("./Home");
+			//Redirect user to home page if successfull
+			WhatsOutUserService woService = new WhatsOutUserService(); 
+			if(woService.registerUser(currentUser)) {
+				request.getSession().setAttribute("wouser",woService.getUserBy(userName));
+				Cookie cookie= new Cookie("wouser",request.getSession().getId());
+				response.addCookie(cookie);
+				request.getRequestDispatcher("./Home").forward(request, response);
 			}
 			
+			//Redirect user to sinup page if fail
 			else {
-				response.sendRedirect("./Signup");
+				request.getRequestDispatcher("./Sinup").forward(request, response);
 			}
 		}
 	}

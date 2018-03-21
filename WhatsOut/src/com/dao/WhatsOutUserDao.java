@@ -96,4 +96,23 @@ public class WhatsOutUserDao {
 		return user;
 	}
 	
+	public WhatsOutUser findBy(String username) {
+		QueryExecutor qex = new QueryExecutor();
+		String query = "SELECT * FROM whatsoutusers WHERE username=?";
+		WhatsOutUser user = null;
+		try {
+			ResultSet rs = qex.getData(query,username);
+			if (rs.next()) {
+				String date[]=rs.getString(10).split("-");
+				user = new WhatsOutUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 
+						LocalDate.of(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2])),new AddressDao().findBy(rs.getInt(11)));
+			}
+		} catch (SQLException sq) {
+			System.out.println(sq);
+		}
+		qex.closeConnection();
+		return user;
+	}
+	
 }
