@@ -13,16 +13,21 @@ public class Comment {
 	private int id;
 	private String description;
 	private LocalDateTime commentAt;
+	private WhatsOutUser user;
+	private Event event;
 	
 	public Comment() {
-		
+		this.event=new Event();
+		this.user=new WhatsOutUser();
 	}
 
-	public Comment(int id, String description, LocalDateTime commentAt) {
+	public Comment(int id, String description, LocalDateTime commentAt,WhatsOutUser user, Event event) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.commentAt = commentAt;
+		this.user=user;
+		this.event=event;
 	}
 
 	public int getId() {
@@ -49,13 +54,20 @@ public class Comment {
 		this.commentAt = commentAt;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((commentAt == null) ? 0 : commentAt.hashCode());
-		result = prime * result + id;
-		return result;
+	public WhatsOutUser getUser() {
+		return user;
+	}
+
+	public void setUser(WhatsOutUser user) {
+		this.user = user;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	@Override

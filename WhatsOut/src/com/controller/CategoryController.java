@@ -30,7 +30,8 @@ public class CategoryController extends HttpServlet {
 		String newCategory = request.getParameter("category");
 //		System.out.println(newCategory);
 //		String newDescription= request.getParameter("description");
-		EventCategory category = new EventCategory(newCategory,"");
+		EventCategory category = new EventCategory();
+		category.setName(newCategory);
 //		System.out.println(category);
 		CategoryService categoryService = new CategoryService();
 		categoryService.addCategory(category);

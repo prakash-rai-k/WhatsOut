@@ -64,29 +64,4 @@ public class SubscriptionDao {
 		return sb;
 	}
 	
-	/*
-	 * Written on March 20, 2018 
-	 * This function retrieves a subscription for a given subscriber
-	 * Uses the model written by Rupendre Maharjan
-	 * Uses the QueryExecutor Class written by Yvan GAKUBA
-	 * @Author Yvan GAKUBA
-	 * */
-	public Subscription findBy(int id) {
-		QueryExecutor qex = new QueryExecutor();
-		String query = "SELECT * FROM subscriptions WHERE subscriberid=?";
-		Subscription sb=null;
-		try {
-			ResultSet rs = qex.getData(query, id);
-			if (rs.next()) {
-				String date[]=rs.getString(2).split("-");
-				sb=new Subscription(rs.getInt(1),
-						LocalDate.of(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2])), new WhatsOutUserDao().findBy(rs.getInt(3)),
-						new EventCategoryDao().findBy(rs.getInt(4)));
-			}
-		} catch (SQLException sq) {
-			System.out.println(sq);
-		}
-		qex.closeConnection();
-		return sb;
-	}
 }

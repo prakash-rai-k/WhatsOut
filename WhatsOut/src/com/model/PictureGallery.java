@@ -9,11 +9,10 @@ package com.model;
 public class PictureGallery {
 	private int id;
 	private String path;
-	
 	private Event event;
 	
 	public PictureGallery() {
-		
+		event=new Event();
 	}
 
 	public PictureGallery(int id, String path, Event event) {
