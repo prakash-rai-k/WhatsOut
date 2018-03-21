@@ -1,0 +1,238 @@
+/*
+    Author : Prakash rai
+    Contact : prakashrainpl@gmail.com
+    Date : 2018/03/20
+    Description : Css for What's out home page
+*/
+
+body{
+    background-color: #E3E6EB;
+    font-family: "century gothic", sans-serif;
+    color: #595555;
+}
+
+/*css for fixed banner */
+.banner{
+    background: #5CB85C;
+    color: #fff;
+    padding: 1%;
+    box-shadow: 0px 0px 10px #333;
+    position: fixed;  /* stick banner in top and 100% width*/
+    top: 0;
+    left: 0;
+    right: 0;
+    clear: both;
+    z-index: 3;
+}
+
+/* css for banner icon */
+.banner-icon{
+    height: 30px;
+    float: left;
+}
+
+/* css for main body where posts are appended */
+.main-body{
+    margin-top: 90px; /* keep some margin from head */
+}
+
+/* css for main post body */
+.main-posts{
+    text-align: center;
+}
+
+/* css left menu bar */
+.sidebar-left{
+    border-right: 1px solid #77B877;
+}
+
+/* css left menu bar items*/
+.menu-item-left{
+    margin-left: 2%;
+}
+
+/* css for right menu bar */
+.sidebar-right{
+    border-left: 1px solid#77B877;
+}
+
+/* css event menu */
+.events-menu{
+    list-style: none;
+}
+
+/* css left menu bar items */
+.events-menu li{
+    margin-left: 4%;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* css left menu bar items */
+.events-menu-item{
+    margin-left: 5px;
+}
+
+/* css for logout dropdown */
+.user-profile-dropdown{
+    float: right;
+    columns: #fff;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    background-size:cover; 
+    cursor: pointer;
+    margin-right: 10%;
+}
+
+/* css for post feedback */
+.post-feedback{
+    list-style: none;
+}
+
+/* css for post feedback items */
+.post-feedback li{
+    float: left;
+    width: 33.33%;
+    cursor: pointer;
+    padding:10px;
+}
+
+/* css for changing bg-color of post feedback items*/
+.post-feedback li:hover{
+    background-color: #DFF0D8;
+}
+
+/* give some space in left corner */
+.post-feedback-item{
+    margin-left: 5px;
+}
+
+/* removing margins in panel-posts */
+.panel-posts{
+    margin-bottom: 0px;
+}
+
+/* adjusting line height */
+.panel-body{
+    line-height: 30px;
+}
+
+/* adjusting image in post */
+.panel-body-image{
+    max-height: 200px;
+    background-size: cover;
+    float: left;
+}
+
+/* adjusting overflow in footer */
+.panel-footer{
+    overflow: auto;
+    padding: 0px;
+}
+
+/* adjusting overflow in comments */
+.post-old-comments{
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+/* positioning glyphicon in posts */
+.post-comments-image{
+    float: left;
+    height: 30px;
+    margin-right: 5px;
+}
+
+/* setting width of comment textbox */
+.comment-textbox{
+    width:94%;
+}
+
+/*adjusting size for previous comment list*/
+.load-old-comments-comment{
+    float: left;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 94%;
+    text-align: left;
+    font-size: 12px;
+    padding-left: 7px;
+}
+
+/* hide comments by default */
+.post-comments{
+    background-color: #F5F5F5;
+    display: none;
+}
+
+/* give some space in top for each post */
+.event-post{
+    margin-bottom: 30px;
+}
+
+/*uuser-profile*/
+.user-profile{
+    padding: 3%;
+}
+
+/*Hide actual file input field*/
+#profile-picture{
+    display:none;
+}
+
+/*adjust profile picture*/
+.upload-profile-picture{
+    float: left;
+    cursor: pointer; 
+    height:150px;
+    width:auto;
+}
+
+/*Hide actual file input field*/
+#event-picture{
+    display:none;
+}
+
+/*adjust event picture*/
+.upload-event-picture{
+    float: left;
+    cursor: pointer; 
+    height:150px;
+    width:auto;
+}
+
+/*adjust heading for prolile page*/
+.profile-heading{
+    font-weight: bold;
+    padding: 3% 0;
+    font-size: 24pt;
+    float: left;
+}
+
+/*adjust picture label*/
+.profile-picture-label{
+    vertical-align: middle;
+    line-height: 150px;
+}
+
+/*adjust picture label*/
+.form-check{
+    text-align: left;
+}
+
+/*adjust picture label*/
+.save-profile{
+    float: left;
+    margin-top: 20px;
+}
+
+/*change invalid message color to red*/
+.invalid-data-input{
+    color: red;
+    font-weight: normal;
+}
+
+
+

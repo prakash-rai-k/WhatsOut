@@ -1,0 +1,44 @@
+<!-- /** * * @author Rupendra MAHARJAN * Date: March 19, 2018 * Description: 
+	Tag Library for Banner and Footer of Each Page */ -->
+
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.1</jsp-version>
+	<short-name>Banner Tag</short-name>
+
+	<!-- Tag Library for banner on each page -->
+	<tag>
+		<name>bannerTag</name>
+		<tag-class>com.tags.BannerTag</tag-class>
+		<body-content>empty</body-content>
+
+		<!-- Defines either the class attribute or ids for styling css -->
+		<attribute>
+			<name>firstId</name>
+			<required>false</required>
+		</attribute>
+
+		<attribute>
+			<name>secondId</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+
+	<!-- Tag Library for footer on each page -->
+	<tag>
+		<name>footerTag</name>
+		<tag-class>com.tags.FooterTag</tag-class>
+		<body-content>empty</body-content>
+
+		<!-- Defines either the class attribute or ids for styling css -->
+		<attribute>
+			<name>firstId</name>
+			<required>false</required>
+		</attribute>
+
+		<attribute>
+			<name>secondId</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+</taglib>
