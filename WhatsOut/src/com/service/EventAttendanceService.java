@@ -47,4 +47,14 @@ public class EventAttendanceService {
 	public List<EventAttendance> getAttendanceListByEvent(int eventID) {
 		return new EventAttendanceDao().findBy(eventID);
 	}
+	
+	/*
+	 * Written on March 21, 2018 
+	 * This function return the attendance list of a particula Event
+	 * Uses the EventAttendanceDao created by Yvan GAKUBA on  March 21, 2018 
+	 * @Author Yvan GAKUBA
+	 * */
+	public List<EventAttendance> getAttendanceListByUser(int userId) {
+		return new EventAttendanceDao().get(userId);
+	}
 }

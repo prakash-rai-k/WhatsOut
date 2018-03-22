@@ -64,6 +64,9 @@ public class EventCategoryDao {
 		qex.closeConnection();
 		return ec;
 	}
+	
+	
+	
 	/*
 	 * Written on March 20, 2018 
 	 * This function retrieves an event categories by name

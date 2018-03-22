@@ -27,6 +27,13 @@ public class Subscription {
 		this.category = category;
 	}
 	
+	public Subscription(LocalDate subscriptionDate, WhatsOutUser subscriber, EventCategory category) {
+		super();
+		this.subscriptionDate = subscriptionDate;
+		this.subscriber = subscriber;
+		this.category = category;
+	}
+	
 	public int getId() {
 		return id;
 	}

@@ -34,7 +34,9 @@ public class SubscriptionService {
 		List<EventCategory> eventCatList = new ArrayList<EventCategory>();
 		
 		for(Subscription subscription : subscriptions) {
-			eventCatList.add(eventCatDao.findBy(subscription.getSubscriber().getId()));
+			if(!eventCatList.contains(subscription.getCategory())) {
+				eventCatList.add(subscription.getCategory());
+			}
 		}
 		
 		return eventCatList;
@@ -64,5 +66,16 @@ public class SubscriptionService {
 		System.out.println(subscriptionDao.update(s));
 	}
 	
+	/*
+	 * Delete all subscriptions
+	 */
+	
+	public boolean deleteSubscription(Subscription s) {
+		return(subscriptionDao.delete(s));
+	}
+	
+	public List<Subscription> getSubscriptionList(int subscriberId){
+		return subscriptionDao.get(subscriberId);
+	}
 	
 }

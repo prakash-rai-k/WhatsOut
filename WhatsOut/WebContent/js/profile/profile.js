@@ -10,6 +10,11 @@ $(document).ready(function(){
     $(".upload-profile-picture").click(function () {
         $("#profile-picture").trigger('click');
     });
+    
+    $('#banner-icon').click(function(){
+    	alert();
+    	window.location = 'http://localhost:8080/WhatsOut/Home';
+    });
 
     //change image on leselection
     $("#profile-picture").change(function(){
@@ -24,13 +29,16 @@ $(document).ready(function(){
 		}
 	});
 	
+    $('#go-profile').click(function(){
+    	$('#event-load').fadeOut();
+    	$('#user-profile-form').fadeIn();
+    });
 	$('#profile-form').validate({
 		
 	});
 		
 	// save profiles on saving changes
 	$('#profile-save').click(function() {
-		alert(1)
 		var fullname= $('#fullname').val();
 		var email =$('#email').val();
 		var state =$("#state-drop-down").val();
@@ -38,10 +46,13 @@ $(document).ready(function(){
 		var phone =$("#phone").val();
 		var choices =[];
 		var interest="";
-		$(".form-check-input:checked").each(function(i){
+		var i = 0;
+		$(".form-check-input:checked").each(function(index,value){
 			choices[i] = $(this).val();
-			interest += choices[i]+ "%%%%%";
+			interest += choices[i]+ ",";
+			i++;
 		});
+		console.log(interest);
 		$.ajax("./Profile", {
 			"type": "post",
 			"datatype": "json",

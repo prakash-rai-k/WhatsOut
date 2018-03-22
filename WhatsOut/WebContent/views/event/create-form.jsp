@@ -1,3 +1,10 @@
+<!---    
+    Autohor : Prakash Rai
+    Date    : 208/03/20
+    Contact : prakashrainpl@gmail.com
+    Description : Create event form
+-->
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="panel panel-success panel-posts">
@@ -33,16 +40,16 @@
 						<c:forEach var="state" items="${states}">
 							<c:choose>
 								<c:when test="${state == userState}">
-									<option value="${state}" selected="selected">${state}</option>	
+									<option value="${state}" selected="selected">${state}</option>
 								</c:when>
-								
+
 								<c:otherwise>
 									<option value="${state}">${state}</option>
 								</c:otherwise>
 							</c:choose>
-							
+
 						</c:forEach>
-						
+
 					</select>
 
 				</div>
@@ -56,9 +63,9 @@
 						<c:forEach var="city" items="${cities}">
 							<c:choose>
 								<c:when test="${city == userCity }">
-									<option value="${city}" selected="selected">${city}</option>	
+									<option value="${city}" selected="selected">${city}</option>
 								</c:when>
-								
+
 								<c:otherwise>
 									<option value="${city}">${city}</option>
 								</c:otherwise>
@@ -69,54 +76,44 @@
 			</div>
 
 			<div class="form-group row">
-				<label for="happening-on" class="col-sm-3 col-form-label">Happening
-					on</label>
+				<label for="happening-on" class="col-sm-3 col-form-label">Happening on</label>
 				<div class="col-sm-9">
-					<input type="date" class="form-control" id="happening-on"
-						name="happeningOn" placeholder="Happening on" required>
+					<input type="date" class="form-control" id="happening-on" name="happeningOn" placeholder="Happening on" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="time" class="col-sm-3 col-form-label">Time
-					on</label>
+				<label for="time" class="col-sm-3 col-form-label">Time on</label>
 				<div class="col-sm-9">
-					<input type="time" class="form-control" id="time"
-						name="time" placeholder="Ending on" required>
+					<input type="time" class="form-control" id="time" name="time" placeholder="Ending on" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label for="ending-on" class="col-sm-3 col-form-label">Ending
-					on</label>
+				<label for="ending-on" class="col-sm-3 col-form-label">Ending on</label>
 				<div class="col-sm-9">
-					<input type="date" class="form-control" id="ending-on"
-						name="endingOn" placeholder="Ending on" required>
+					<input type="date" class="form-control" id="ending-on" name="endingOn" placeholder="Ending on" required>
 				</div>
 			</div>
-			
+
 			<div class="form-group row">
-				<label for="time-end" class="col-sm-3 col-form-label">Time
-					on</label>
+				<label for="time-end" class="col-sm-3 col-form-label">Time on</label>
 				<div class="col-sm-9">
-					<input type="time" class="form-control" id="time-end"
-						name="timeEnd" placeholder="Ending on" required>
+					<input type="time" class="form-control" id="time-end" name="timeEnd" placeholder="Ending on" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="capacity" class="col-sm-3 col-form-label">Capacity</label>
 				<div class="col-sm-9">
-					<input type="number" class="form-control" id="capacity"
-						name="capacity" placeholder="Capacity" required>
+					<input type="number" class="form-control" id="capacity" name="capacity" placeholder="Capacity" required>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="description" class="col-sm-3 col-form-label">Description</label>
 				<div class="col-sm-9">
-					<textarea rows="5" class="form-control" name="description"
-						id="description"></textarea>
+					<textarea rows="5" class="form-control" name="description" id="description"></textarea>
 				</div>
 			</div>
 

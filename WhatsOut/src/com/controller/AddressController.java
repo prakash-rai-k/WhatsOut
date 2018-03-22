@@ -15,6 +15,11 @@ import org.json.simple.JSONObject;
 import com.model.Address;
 import com.service.AddressService;
 
+/*
+ * Written on March 19, 2018
+ * It creates JSON object for User Address
+ * @Author Rupendra MAHARJAN
+ */
 @WebServlet("/AddressController")
 public class AddressController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +27,11 @@ public class AddressController extends HttpServlet {
 	public AddressController() {
 		super();
 	}
-
+	
+	/*
+	 * Returns the JSON object of the address
+	 * as the state and city 
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String state = request.getParameter("state");

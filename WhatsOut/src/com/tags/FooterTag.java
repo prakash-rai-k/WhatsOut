@@ -10,7 +10,7 @@ public class FooterTag extends SimpleTagSupport{
 	
 	@Override
 	public void doTag() throws JspException, IOException{
-		String footer = String.format("<div class='%s'>%s</div>",className,"Footer" );
+		String footer = String.format("<div class='%s'>%s</div>",className,"© 2018 Copyright: MUM.EDU" );
 		getJspContext().getOut().write(footer);
 	}
 	

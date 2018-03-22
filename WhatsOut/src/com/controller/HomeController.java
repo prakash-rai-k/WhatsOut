@@ -2,6 +2,7 @@ package com.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,21 +49,28 @@ public class HomeController extends HttpServlet {
 			AddressService addressService = new AddressService();
 			
 			//List all subscribed categories
+			List<String> subscriptionList = wouser.getSubscriptionList().stream()
+					.map(list -> list.getCategory().getName().toString()).distinct().collect(Collectors.toList());
 			List<EventCategory> subscribedCategories = subscriptionService.getSubscribedCategories(wouser.getId());
 			List<EventCategory> categories = subscriptionService.getEventCategories();
 			List<String> states = addressService.getStateList();
 			List<String> cities = addressService.getCities(wouser.getAddress().getState());
 			
+			for(EventCategory ss : subscribedCategories) {
+				System.out.println(ss);
+			}
 			//Adding categories subscribed by logged in user
 			//Adding events list related to user
+			System.out.println(subscribedCategories.size());
+			request.setAttribute("subscriptionList", subscriptionList);
 	    	request.setAttribute("categoryList", subscribedCategories);
-	    	request.setAttribute("events", eventService.getAll());
+	    	request.setAttribute("events", eventService.getAll(wouser.getId()));
 	    	request.setAttribute("states", states);
 	    	request.setAttribute("cities", cities);
 	    	request.setAttribute("userState", wouser.getAddress().getState());
 	    	request.setAttribute("userCity", wouser.getAddress().getCity());
 	    	request.setAttribute("categories", categories);
-	    	
+	    	request.setAttribute("userID", wouser.getId());
 	    	request.getServletContext().getRequestDispatcher("/views/home/home.jsp").forward(request,response);
 		}
 		

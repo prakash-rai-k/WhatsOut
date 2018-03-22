@@ -4,24 +4,28 @@
 
 $(document).ready(function(){
 	$("#add-category").click(function(){
-		console.log('added');
+		//console.log('added');
 		var category = $("#category-text").val();
-		$.ajax("./CategoryController",{
-			"type":"get",
+		$.ajax("http://localhost:8080/WhatsOut/CategoryController",{
+			"type":"post",
 			"data": {
-				"category": category
+				"category": category,
+				"description":$('#category-description').val()
 			}
 		})
-		.done(ajaxSuccess)
-		.fail(ajaxFailure);
+		.done(ajaxSuccess1)
+		.fail(ajaxFailure1);
 	});
-	function ajaxSuccess(data){
+	function ajaxSuccess1(data){
+		$("#my-categories").html('');
+		jQuery.each(data, function(key,value){
+			$('<li class="nav-item">').html(`<a class="nav-link" href="#">${value.name}</a>`).appendTo("#my-categories");
+		});
 		$("#category-text").val('');
-		var len = data.length;
-		$("#list-category")
-		.append(data[len-1].category + '<br/>');
+		
 	}
-	function ajaxFailure(msg){
+	function ajaxFailure1(msg){
+		console.log('fail');
 		console.log(msg)
 	}
 });

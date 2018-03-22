@@ -1,3 +1,10 @@
+<!---    
+    Autohor : Prakash Rai
+    Date    : 208/03/20
+    Contact : prakashrainpl@gmail.com
+    Description : Layout page for sinup page
+-->
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="wout" uri="/WEB-INF/taglib/customTag.tld"%>
 
@@ -49,9 +56,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<img src="images/fun.jpg" />
-
-			</div>
-			<!-- col -->
+			</div><!-- col -->
 
 			<div class="col-md-4">
 				<h2>
@@ -68,19 +73,16 @@
 							placeholder="FirstName" required />
 					</div>
 					<!-- form-group -->
-
 					<div class="form-group">
 						<input type="text" class="form-control" name="middlename"
 							placeholder="MiddleName (Optional)" />
 					</div>
 					<!-- form-group -->
-
 					<div class="form-group">
 						<input type="text" class="form-control" name="lastname"
 							placeholder="LastName" required />
 					</div>
-					<!-- form-group -->
-
+					
 					<!-- Display List of States -->
 					<div class="form-group">
 						<select class="custom-select form-control" id="state-drop-down" name="state">
@@ -100,9 +102,6 @@
 						</select>
 					</div>
 					<!-- form-group -->
-
-
-
 					<div class="form-group">
 						<input type="text" class="form-control" name="phone"
 							placeholder="Phone" required />
@@ -149,7 +148,6 @@
 	<!-- container -->
 
 	<script src="js/signup/signup.js">
-		
 	</script>
 </body>
 

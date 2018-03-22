@@ -17,4 +17,12 @@ public class EventCategoryService {
 	public EventCategory getEventCategoryBy(int id) {
 		return dao.findBy(id);
 	}
+	
+	public EventCategory getEventCategoryBy(String name) {
+		return dao.findBy(name);
+	}
+	
+	
+	
+	
 }

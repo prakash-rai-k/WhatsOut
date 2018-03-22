@@ -24,7 +24,7 @@ $(function(){
     	}else{
     		$(helper)
     	 	   .empty()
-    	 	   .append($("<i class='glyphicon glyphicon-hands-up'>").text(""))
+    	 	   .append($("<i class='glyphicon glyphicon-plus'>").text(""))
     	 	   .removeClass("bg-primary")
     	 	   .append(data.Message), 
     	 	   $("#nbr"+$(helper).attr('title'))

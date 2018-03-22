@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.service.CommentService;
+import com.service.EventAttendanceService;
+
 /**
 *
 * @author Rupendra MAHARJAN
@@ -20,6 +23,7 @@ public class Event {
 	private LocalDateTime happeningOn;
 	private LocalDateTime endingOn;
 	private int capacity;
+	private int totalComing;
 	private Address address;
 	private EventCategory eventCategory;
 	private WhatsOutUser eventCreator;
@@ -138,8 +142,12 @@ public class Event {
 	public List<EventAttendance> getEventAttendanceList() {
 		return eventAttendanceList;
 	}
-	
-	
+	/*The total number of people attending the event*/
+	public int getTotalComing() {
+		totalComing=0;
+		return new EventAttendanceService().getAttendanceListByEvent(this.getId()).size();
+	}
+
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", logo=" + logo

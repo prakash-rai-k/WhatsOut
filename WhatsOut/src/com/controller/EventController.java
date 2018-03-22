@@ -1,9 +1,8 @@
 package com.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import com.model.Event;
 import com.model.EventCategory;
 import com.model.WhatsOutUser;
 import com.service.AddressService;
+import com.service.EventAttendanceService;
 import com.service.EventCategoryService;
 import com.service.EventService;
 
@@ -52,11 +52,30 @@ public class EventController extends HttpServlet {
 		
 		else {
 			String type = request.getParameter("type");
+			System.out.println(type);
 			EventService eventService = new EventService();
 			WhatsOutUser wouser = (WhatsOutUser) request.getSession().getAttribute("wouser");
-			List<Event> eventList = eventService.getEventsBy(wouser);
+			List<Event> eventList = new ArrayList<Event>();
 			
-			if(type == "attended-events") {
+			if(type.equals("my-events")) {
+				eventList = eventService.getEventsBy(wouser); 
+				System.out.println(eventList.size());
+			}
+			
+			if(type.equals("attended-events")) {
+				eventList = eventService.getAttendedEventsBy(wouser); 
+			}
+			
+			if(type.equals("coming-events")) {
+				eventList = eventService.getAtteningEventsBy(wouser); 
+			}
+			
+			if(type.equals("search")) {
+				String searchString = (String) request.getParameter("searchString");
+				eventList = eventService.searchEvent(searchString);
+			}
+			
+			else {
 				
 			}
 			
@@ -76,6 +95,7 @@ public class EventController extends HttpServlet {
 				res.put("capacity", event.getCapacity());
 				res.put("address", event.getAddress().getCity() + ", " + event.getAddress().getState());
 				res.put("eventCreator", event.getEventCreator().getFirstName() + " " + event.getEventCreator().getLastName());
+				res.put("isAttending",eventService.isUserAttending(event.getId(), wouser.getId()));
 				arrEvent[i] = res;
 				i++;
 			}
@@ -114,15 +134,21 @@ public class EventController extends HttpServlet {
 			String endingOn = (String) request.getParameter("endingOn");
 			Integer categoryId = Integer.parseInt((String) request.getParameter("category"));
 			Integer capacity = Integer.parseInt((String) request.getParameter("capacity"));
-			/*System.out.println("Title : " + title + ", State :" + state + ", City : " + city + ", Description:" + description + ", Time : " + time + 
-					", happeningOn:" + happeningOn + ", endingOn:" + endingOn + ", categoryId : " + categoryId +", capacity : " + capacity);*/
 			
 			//Parsing date into localdatetime
-			LocalDateTime happeningOnObj = LocalDateTime.of(Integer.parseInt(happeningOn.split("-")[0]), Integer.parseInt(happeningOn.split("-")[1]), Integer.parseInt(happeningOn.split("-")[2]),
-					Integer.parseInt(time.split(":")[0]), Integer.parseInt(time.split(":")[1]));
+			LocalDateTime happeningOnObj =  LocalDateTime.of(
+											Integer.parseInt(happeningOn.split("-")[0]), 
+											Integer.parseInt(happeningOn.split("-")[1]), 
+											Integer.parseInt(happeningOn.split("-")[2]),
+										    Integer.parseInt(time.split(":")[0]), 
+										    Integer.parseInt(time.split(":")[1]));
 			
-			LocalDateTime endingOnObj = LocalDateTime.of(Integer.parseInt(endingOn.split("-")[0]), Integer.parseInt(endingOn.split("-")[1]), Integer.parseInt(endingOn.split("-")[2]),
-					Integer.parseInt(timeEnd.split(":")[0]), Integer.parseInt(timeEnd.split(":")[1]));
+			LocalDateTime endingOnObj = LocalDateTime.of(
+										Integer.parseInt(endingOn.split("-")[0]), 
+										Integer.parseInt(endingOn.split("-")[1]), 
+										Integer.parseInt(endingOn.split("-")[2]),
+										Integer.parseInt(timeEnd.split(":")[0]), 
+										Integer.parseInt(timeEnd.split(":")[1]));
 			
 			EventCategory categoryObj = eventCatService.getEventCategoryBy(categoryId);
 			Address addressObj = addressService.getAddress(state, city);

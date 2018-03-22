@@ -6,17 +6,37 @@
 */
 
 $(document).ready(function(){
-	// Show hide when comment clicked in post post-feedback-comment
+	/*
+	 * Show/hide comment while clicking on 'Say something'
+	 *  Author : prakash rai
+	 */
     $(document).on('click', '.post-feedback-comment', function(){
         let postId = $(this).attr('post-id');
+        theID=$(this).attr('post-id');
         $('#post-comment-' + postId).toggle(100);
+        /*
+         * Author: Yvan GAKUBA
+         * To send an ajax call to retrieve all the comments*/
+        $.get("./CommentController?id="+postId)
+        .done(formatData);
     });
+    
+    function formatData(data){
+    	$('.post-old-comments').html('');
+    	data.forEach(elt=>{
+    		$('.post-old-comments').append(`<div><img src="images/user.jpg" class="post-comments-image">
+    		<div class="load-old-comments-comment">${elt.description}</div></div>`);
+    	});
+    }
     
     $(".upload-event-picture").click(function () {
         $("#event-picture").trigger('click');
     });
 
-    // change image on selection
+    /*
+	 * Open windows when profile picture is clicked 
+	 * Author : prakash rai
+	 */
     $("#event-picture").change(function(){
         let input = this;
         if (input.files) {
@@ -29,42 +49,73 @@ $(document).ready(function(){
         }
     });
     
-    // load user events
+    /*
+	 * List my events when user clicks 'My events' 
+	 * Author : prakash rai
+	 */
     $('#my-events').click(function(){
     	loadMyEvents("my-events");
     });
     
- // load user events
+    /*
+	 * List coming events when user clicks 'Coming events' 
+	 * Author : prakash rai
+	 */
     $('#coming-events').click(function(){
     	loadMyEvents("coming-events");
     });
     
- // load user events
+    /*
+	 * Search events based on string inside textbox 
+	 * Author : prakash rai
+	 */
+    $('#search-event').click(function(){
+    	loadMyEvents("search");
+    });
+    
+    /*
+	 * List attended events when user clicks 'Attended events' 
+	 * Author : prakash rai
+	 */
     $('#attended-events').click(function(){
     	loadMyEvents("attended-events");
     });
     
-    // load user events
+    /*
+	 * List favourite events when user clicks 'Favourite events' 
+	 * Author : prakash rai
+	 */
     $('#favourite-events').click(function(){
     	loadMyEvents("favourite-events");
     });
     
-    //Load events based on type parameter
+    /*
+	 * Function that renders events based on user demand
+	 * params: type of event (attende/attending/userEvents/search) 
+	 * Author : prakash rai
+	 */
     function loadMyEvents(type){
+    	$('#post-type').val(type);
     	$.ajax("http://localhost:8080/WhatsOut/Event",{
 			"type":"get",
-			"data" : {"type": type}
+			"data" : {"type": type, "searchString" : $('#search-text').val()}
 		}).done(loadEventsSuccess)
 		  .fail(loadEventsFail);
     }
     
-    // show event list and show create form
+    /*
+	 * Show create event form 
+	 * Author : prakash rai
+	 */
     $(document).on('click', '#btn-create-event', function(){
     	$('#event-load').fadeOut();
     	$('#create-event').fadeIn();
     });
     
-    // load cities on state change
+    /*
+	 * List cities dropdown when state change
+	 * Author : prakash rai
+	 */
     $('#state').on("change",function(){
 		var state = $('#state').val();
 		$.ajax("http://localhost:8080/WhatsOut//AddressController",
@@ -78,7 +129,10 @@ $(document).ready(function(){
 		.fail(loadCitiesFail);
 	});
     
-    //populate city select with options
+    /*
+	 * Populate city dropdown
+	 * Author : prakash rai
+	 */
     function loadCitiesSuccess(data){
 		$('#city').empty();
 		jQuery.each(data, function(key, value){
@@ -86,12 +140,18 @@ $(document).ready(function(){
 		});
 	}
     
-    //display alert message
+    /*
+	 * List attended events when user clicks 'Attended events' 
+	 * Author : prakash rai
+	 */
 	function loadCitiesFail(msg){
 		alert('Failed to load cities')
 	}
 	
-  // Used for form validation using jquery validation
+	/*
+	 * jquery Validator fucntion to validate new form
+	 * Author : prakash rai
+	 */
     $('#new-event-form').validate({
     	// Rules defined for Page Validation
     	rules : {
@@ -131,7 +191,27 @@ $(document).ready(function(){
     	}
     });
     
-    // save Event
+    /*
+	 * New validator method for comparing dates 
+	 * Author : prakash rai
+	 */
+    jQuery.validator.addMethod("greaterThan", 
+    		function(value, element, params) {
+
+    		    if (!/Invalid|NaN/.test(new Date(value))) {
+    		        return new Date(value) > new Date($(params).val());
+    		    }
+
+    		    return isNaN(value) && isNaN($(params).val()) 
+    		        || (Number(value) > Number($(params).val())); 
+    		},'Must be greater than {0}.');
+    $("#ending-on").rules('add', { greaterThan: "#happening-on" });
+    
+    /*
+	 * Save event function
+	 * takes values from from and calls servlet through ajax 
+	 * Author : prakash rai
+	 */
     function saveEvent(){
     	let title = $('#title').val();
     	let state = $('#state').val();
@@ -145,11 +225,9 @@ $(document).ready(function(){
     	let category = $('#category').val();
         let logo = $('#event-picture')[0].files;
         
-        if(logo.length > 0){
-        	logo = logo[0];
-        }
-    	
-    	let data = {"title": title, "city" : city,  "state" : state, "description" : description, "timeEnd" : timeEnd,
+        if(logo.length > 0) logo = logo[0];
+        
+        let data = {"title": title, "city" : city,  "state" : state, "description" : description, "timeEnd" : timeEnd,
     				"happeningOn" : happeningOn, "endingOn" : endingOn, "category" : category, "time" : time,// "logo":
 																												// logo,
     				"capacity": capacity
@@ -164,78 +242,107 @@ $(document).ready(function(){
 				.fail(postEventFail);
     }
     
-    //Event post success event
+    /*
+	 * Handling success 
+	 * Author : prakash rai
+	 */
     function postEventSuccess(msg){
     	loadMyEvents("my-events");
     	$(window).scrollTop(0);
     }
     
-    //Event post failed case
+    /*
+	 * List attended events when user clicks 'Attended events' 
+	 * Author : prakash rai
+	 */
     function postEventFail(xhr, status, exception){
     	console.log('error');
     }
     
-    // load events in box
+    /*
+	 * populates events after succefull load from ajax
+	 * Author : prakash rai
+	 */
     function loadEventsSuccess(data){
     	$('#event-load').html('');
-    	$('<div class="dynamic-div">').html(`<button class='btn btn-primary btn-create-event' id="btn-create-event">Create new event</button>`).appendTo('#event-load');
     	
-    	jQuery.each(data, function(index,event){
-    		let post = `<div class="panel panel-success panel-posts">
-							<div class="panel-heading">
-								<h1 class="panel-title">${event.title}</h1>
-							</div>
-							<!-- panel heading -->
+    	if($('#post-type').val() === 'search'){
+			let searchString = $('#search-text').val();
+			$('<div class="alert alert-success">').html(`Search results for <strong>${searchString}</strong>`).appendTo('#event-load');
+		}
+    	else{
+    		$('#search-text').val('');
+    	}
+    	
+    	if(data.length === 0){
+    		$('<div class="alert alert-success">').html(`No events found!!`).appendTo('#event-load');
+    	}
+    	else{
+    		if($('#post-type').val() === 'my-events'){
+    			$('<div class="dynamic-div">').html(`<button class='btn btn-primary btn-create-event' id="btn-create-event">Create new event</button>`).appendTo('#event-load');
+    		}
+    		jQuery.each(data, function(index,event){
+        		let post = `<div class="panel panel-success panel-posts">
+    							<div class="panel-heading">
+    								<h1 class="panel-title">${event.title}</h1>
+    							</div><!-- panel heading -->
 
-							<div class="panel-body">
-								<img src="images/event/1/default.png" class="panel-body-image" /> <Strong>Location
-									: </Strong> ${event.address}<br> <Strong>Organized by :
-								</Strong> ${event.eventCreator} <br> 
-								<Strong>Datetime: </Strong> ${event.happeningOn}
-								<br> 
-								<p>${event.description}</p>
-							</div>
-							<!-- panel-body -->
+    							<div class="panel-body">
+    								<img src="images/event/1/default.png" class="panel-body-image" /> 
+    								<div class='post-contents'>
+    									<Strong>Location: </Strong> ${event.address}<br> <Strong>Organized by : </Strong> ${event.eventCreator} <br> 
+    									<Strong>Datetime: </Strong> ${event.happeningOn}<br> 
+    									<p>${event.description}</p>
+    								</div>
+    							</div><!-- panel-body -->
 
-							<div class="panel-footer">
+    							<div class="panel-footer">
 								<ul class="post-feedback">
-									<li><i class="glyphicon glyphicon-plus"></i> <span
-										class="post-feedback-item">Count me</span></li>
+										<li class="post-feedback-count-me bg-primary" title="${event.id}"><i class="glyphicon glyphicon-thumbs-up"></i> <span
+										class="post-feedback-item">Attending!</span></li>
+									
 									<li><i class="glyphicon glyphicon-comment"></i> <span
 										class="post-feedback-item post-feedback-comment" post-id="${event.id}">Say
 											something</span></li>
 									<li><i class="glyphicon glyphicon-hand-up"></i> <span
-										class="post-feedback-item">20 attending</span></li>
+										class="post-feedback-item" id="nbr${event.id}">${event.totalComing} attending</span></li>
 								</ul>
 							</div>
 							<!-- panel-footer -->
-							<div class="panel panel-default post-comments" id="post-comment-${event.id}">
-							<div class="panel-body">
-								<div class="post-old-comments">
+						</div>
+						<div class="panel panel-default post-comments post-comments-main" id="post-comment-${event.id}">
+							<div class="panel-body" id="body-${event.id}">
+								<div class="post-old-comments" id="append-${event.id}">
 									<img src="images/user.jpg" class="post-comments-image" />
-									<div class="load-old-comments-comment">Here goes the
-										comment. Awsomme!!!Here goes the comment. Awsomme!!!Here goes
-										the comment. Awsomme!!!</div>
+									<div class="load-old-comments-comment"></div>
 								</div>
-
 								<div class="post-new-comment">
-									<img src="images/user.jpg" class="post-comments-image" /> <input
-										type="text" class="form-control comment-textbox"
-										placeholder="Write something..." />
+									<img src="images/user.jpg" class="post-comments-image" />
+									 <input
+										type="text" class="form-control comment-textbox comment-input" id="comment-${event.id}"
+										placeholder="Write something..."/>
+										<input type="hidden" value="${event.id}" id="commentID-${event.id}"/>
+										<button title="${event.id}" type="button" class="btn btn-success add-comment" name="add-category">
+											<i class="glyphicon glyphicon-comment"></i> Share
+										</button>
 								</div>
 							</div>
-						</div>
-					</div>`;
-    		
-    		$('<div class="dynamic-div">').html(post).appendTo('#event-load');
-    		
-        	$('#create-event').fadeOut();
-        	$('#event-load').fadeIn(200);
-    		
-    	});
+    						</div>`;
+        		
+        		$('<div class="dynamic-div">')
+        			.html(post)
+        			.appendTo('#event-load');
+        		
+            	$('#create-event').fadeOut();
+            	$('#event-load').fadeIn(200);
+        	});
+    	}
     }
     
-    // failure ajax call failure handle
+    /*
+	 * Method to handle failed condition for loading events
+	 * Author : prakash rai
+	 */
     function loadEventsFail(xhr, state, exception){
     	alert('Problem occured while loading your events.')
     }

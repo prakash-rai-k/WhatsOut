@@ -43,6 +43,7 @@ public class WhatsOutUser {
 		this.middleName = middleName;
 		this.email = email;
 		this.phone = phone;
+		this.password = password;
 		this.profilePicture = profilePicture;
 		this.joinDate = joinDate;
 		this.address = address;

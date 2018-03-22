@@ -32,13 +32,9 @@
 
 		<!-- Defines either the class attribute or ids for styling css -->
 		<attribute>
-			<name>firstId</name>
+			<name>className</name>
 			<required>false</required>
 		</attribute>
 
-		<attribute>
-			<name>secondId</name>
-			<required>false</required>
-		</attribute>
 	</tag>
 </taglib>

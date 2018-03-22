@@ -46,7 +46,7 @@ public class AttendanceController extends HttpServlet {
 			JSONObject res = new JSONObject();
 			if (eas.isAttending(ea)) {
 				eas.removeAttendant(ea);
-				res.put("Message", " Count Me!");
+				res.put("Message", " Count Me");
 			} else {
 				eas.addAttendant(ea);
 				res.put("Message", " Attending!");

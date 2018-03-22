@@ -29,7 +29,7 @@ public class SignupController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("wouser")==null) {			
+		System.out.println("here");		
 			String firstName = request.getParameter("firstname");
 			String middleName = request.getParameter("middlename");
 			String lastName = request.getParameter("lastname");
@@ -44,20 +44,22 @@ public class SignupController extends HttpServlet {
 			WhatsOutUser currentUser = new WhatsOutUser(0,userName, password, firstName, lastName, middleName,
 					email,phone,"", LocalDate.now(),new AddressService().getAddress(state, city));
 			
+			System.out.println(currentUser);
+			
 			//Redirect user to home page if successfull
 			WhatsOutUserService woService = new WhatsOutUserService(); 
 			if(woService.registerUser(currentUser)) {
 				request.getSession().setAttribute("wouser",woService.getUserBy(userName));
-				Cookie cookie= new Cookie("wouser",request.getSession().getId());
-				response.addCookie(cookie);
+				//Cookie cookie= new Cookie("wouser",request.getSession().getId());
+				//response.addCookie(cookie);
 				request.getRequestDispatcher("./Home").forward(request, response);
 			}
 			
 			//Redirect user to sinup page if fail
 			else {
-				request.getRequestDispatcher("./Sinup").forward(request, response);
+				response.sendRedirect("/Signup");
 			}
-		}
+
 	}
 
 }
