@@ -23,6 +23,7 @@ public class Event {
 	private Address address;
 	private EventCategory eventCategory;
 	private WhatsOutUser eventCreator;
+	private boolean attending;
 	private List<Comment> commentList;
 	private List<Rating> ratingList;
 	private List<EventAttendance> eventAttendanceList;
@@ -118,6 +119,15 @@ public class Event {
 	public void setEventCreator(WhatsOutUser eventCreator) {
 		this.eventCreator = eventCreator;
 	}
+
+	public boolean isAttending() {
+		return attending;
+	}
+
+	public void setAttending(boolean attending) {
+		this.attending = attending;
+	}
+
 	public List<Comment> getCommentList() {
 		return commentList;
 	}
@@ -128,6 +138,8 @@ public class Event {
 	public List<EventAttendance> getEventAttendanceList() {
 		return eventAttendanceList;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", logo=" + logo

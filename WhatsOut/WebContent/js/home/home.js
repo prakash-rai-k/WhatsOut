@@ -6,13 +6,7 @@
 */
 
 $(document).ready(function(){
-    //Show hide when comment clicked in post
-    $('.post-feedback-comment').click(function(){
-        
-        let postId = $(this).attr('post-id');
-        console.log(postId);
-        $('#post-comment-' + postId).toggle(200);
-    });
+    
     
     
 });

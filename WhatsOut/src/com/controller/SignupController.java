@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.model.WhatsOutUser;
 import com.service.AddressService;
 import com.service.WhatsOutUserService;
@@ -24,8 +25,6 @@ public class SignupController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AddressService addressService = new AddressService();
 		request.setAttribute("stateList",addressService.getStateList());
-		String[] cityList = {"Fairfied", "DavenPort"};
-		request.setAttribute("cityList", cityList);
 		request.getServletContext().getRequestDispatcher("/views/signup/signup.jsp").forward(request, response);
 	}
 

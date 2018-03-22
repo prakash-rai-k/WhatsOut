@@ -24,18 +24,9 @@ public class CategoryController extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Here" + request.getParameter("category"));
-		String newCategory = request.getParameter("category");
-//		System.out.println(newCategory);
-//		String newDescription= request.getParameter("description");
-		EventCategory category = new EventCategory();
-		category.setName(newCategory);
-//		System.out.println(category);
 		CategoryService categoryService = new CategoryService();
-		categoryService.addCategory(category);
 		List<EventCategory> categoryList = categoryService.getCategoryList();
 		JSONObject[] arrCategory = new JSONObject[categoryList.size()];
 		for (int i = 0; i < categoryList.size(); ++i) {
@@ -47,6 +38,17 @@ public class CategoryController extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().println(Arrays.toString(arrCategory));
 		response.getWriter().flush();
+	}
+	
+	//Push the category inserted by the user into the database
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	throws ServletException, IOException{
+		String newCategory = request.getParameter("category");
+		String newDescription = request.getParameter("description");
+		EventCategory category = new EventCategory(newCategory,newDescription);
+		(new CategoryService()).addCategory(category);
+		this.doGet(request, response);
+		
 	}
 
 }

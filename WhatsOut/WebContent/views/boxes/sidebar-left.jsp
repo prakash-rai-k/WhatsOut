@@ -10,12 +10,12 @@
 	<ul class="events-menu ">
 		<li id="my-events"><i class="glyphicon glyphicon-user"></i> <span
 			class="events-menu-item">My Events</span></li>
-		<li id="coming-events"><i class="glyphicon glyphicon-hand-up">
-		</i><span class="events-menu-item"></span>Coming Events</li>
+		<li id="coming-events"><i class="glyphicon glyphicon-hand-up"></i> <span
+			class="events-menu-item"></span>Coming Events</span></li>
 		<li id="attended-events"><i class="glyphicon glyphicon-ok"></i> <span
-			class="events-menu-item"></span>Events Attended</li>
+			class="events-menu-item"></span>Events Attended</span></li>
 		<li id="favourite-events"><i class="glyphicon glyphicon-thumbs-up"></i> <span
-			class="events-menu-item"></span>Favourite</li>
+			class="events-menu-item"></span>Favourite</span></li>
 	</ul>
 </div>
 <!-- col -->

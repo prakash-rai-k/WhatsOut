@@ -89,15 +89,15 @@
                     </li>
                     <li>
                         <i class="glyphicon glyphicon-hand-up"></i>
-                        <span class="events-menu-item"></span>Coming Events
+                        <span class="events-menu-item"></span>Coming Events</span>
                     </li>
                     <li>
                         <i class="glyphicon glyphicon-ok"></i>
-                        <span class="events-menu-item"></span>Events Attended
+                        <span class="events-menu-item"></span>Events Attended</span>
                     </li>
                     <li>
                         <i class="glyphicon glyphicon-thumbs-up"></i>
-                        <span class="events-menu-item"></span>Favourite
+                        <span class="events-menu-item"></span>Favourite</span>
                     </li>
                 </ul>
             </div>

@@ -84,13 +84,15 @@ public class EventAttendance {
 		if (user == null) {
 			if (other.user != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!user.equals(other.user)) 
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "EventAttendance [id=" + id + ", signDate=" + signDate + "]";
+		return "EventAttendance [id=" + id + ", signDate=" + signDate + ", user=" + user + ", event=" + event + "]";
 	}
+
+	
 }

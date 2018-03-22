@@ -11,8 +11,12 @@
 				id="list-category"></span></a></li>
 
 	</ul>
-	<input type="text" id="category-text" placeholder="Sports, Events..."
-		name="category">
-	<button type="button" name="add-category" id="add-category">Add
-		Category</button>
+	
+	<hr/>
+	<input type="text" class="form-control suggest-category" id="category-text"
+		placeholder="Category" name="category">
+	<textarea class="form-control suggest-category" rows="3" id="category-description"
+		placeholder="Description" name="description"></textarea>
+	<button type="button" class="btn btn-success suggest-category" name="add-category"
+		id="add-category">Suggest</button>
 </div>

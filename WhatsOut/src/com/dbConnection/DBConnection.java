@@ -20,8 +20,8 @@ public class DBConnection {
 	 * match the port number of your installed MYSQL
 	 *  */
 	private static final String user = "root";
-	private static final String password = "yvan";
-	private static final String mySQLURL = "jdbc:mysql://127.0.0.1:3307/WhatsOutdb";
+	private static final String password = "root";
+	private static final String mySQLURL = "jdbc:mysql://127.0.0.1:3306/WhatsOutdb";
 
 	private Connection con;
 

@@ -1,12 +1,5 @@
 package com.model;
 
-/**
-*
-* @author Yvan GAKUBA
-* Date: 03/20/2018
-* Description: Comment Information
-*/
-
 public class Rating {
 	private int id;
 	private int value;

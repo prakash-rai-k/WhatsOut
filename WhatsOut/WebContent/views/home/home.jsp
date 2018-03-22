@@ -37,12 +37,14 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="js/libraries/jquery.validate.min.js"></script>
+
 <!-- main.js -->
 <script src="js/home/home.js"></script>
 
 <!-- main.js -->
 <script src="js/category/category.js"></script>
-
+<script src="js/attendance/attendance.js"></script>
 <!-- main.js -->
 <script src="js/event/event.js"></script>
 </head>
@@ -78,7 +80,7 @@
 							<!-- panel heading -->
 
 							<div class="panel-body">
-								<img src="images/event/${event.id}/${event.logo}"
+								<img src="images/event/1/default.png"
 									class="panel-body-image" /> <Strong>Location : </Strong>
 								${event.address.city}, ${event.address.state} <br> <Strong>Organized
 									by : </Strong> ${event.eventCreator.firstName}
@@ -90,16 +92,39 @@
 
 							<div class="panel-footer">
 								<ul class="post-feedback">
-									<li><i class="glyphicon glyphicon-plus"></i> <span
+								<c:if test=""></c:if>
+									<c:if test="${event.attending}">
+										<li class="post-feedback-count-me bg-primary" title="${event.id}"><i class="glyphicon glyphicon-thumbs-up"></i> <span
+										class="post-feedback-item">Attending!</span></li>
+									</c:if>
+									<c:if test="${!event.attending}">
+									<li class="post-feedback-count-me" title="${event.id}"><i class="glyphicon glyphicon-plus"></i> <span
 										class="post-feedback-item">Count me</span></li>
+									</c:if>
 									<li><i class="glyphicon glyphicon-comment"></i> <span
-										class="post-feedback-item post-feedback-comment" post-id="1">Say
+										class="post-feedback-item post-feedback-comment" post-id="${event.id}">Say
 											something</span></li>
 									<li><i class="glyphicon glyphicon-hand-up"></i> <span
-										class="post-feedback-item">20 attending</span></li>
+										class="post-feedback-item" id="nbr${event.id}">20 attending</span></li>
 								</ul>
 							</div>
 							<!-- panel-footer -->
+						</div>
+						<div class="panel panel-default post-comments post-comments-main" id="post-comment-${event.id}">
+							<div class="panel-body">
+								<div class="post-old-comments">
+									<img src="images/user.jpg" class="post-comments-image" />
+									<div class="load-old-comments-comment">Here goes the
+										comment. Awsomme!!!Here goes the comment. Awsomme!!!Here goes
+										the comment. Awsomme!!!</div>
+								</div>
+
+								<div class="post-new-comment">
+									<img src="images/user.jpg" class="post-comments-image" /> <input
+										type="text" class="form-control comment-textbox"
+										placeholder="Write something..." />
+								</div>
+							</div>
 						</div>
 					</c:forEach>
 				</div>

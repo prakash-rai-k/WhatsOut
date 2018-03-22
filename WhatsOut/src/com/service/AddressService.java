@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,5 +37,20 @@ public class AddressService{
 	
 	public Address getAddress(String state, String city) {
 		return addressDao.findBy(state, city);
+	}
+	
+	//@author: Prakash Rai
+	//Gets Cities of state
+	//parameters: state
+	//returns : list of cities
+	public List<String> getCities(String state) {
+		List<Address> addresses = addressDao.findBy(state);
+		List<String> cities = new ArrayList<String>();
+		
+		for(Address address : addresses ){
+			cities.add(address.getCity());
+		}
+		
+		return cities;
 	}
 }

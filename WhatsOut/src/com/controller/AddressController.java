@@ -23,7 +23,6 @@ public class AddressController extends HttpServlet {
 		super();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String state = request.getParameter("state");
