@@ -7,11 +7,11 @@ import java.util.List;
 import com.service.CommentService;
 import com.service.EventAttendanceService;
 
-/**
-*
-* @author Rupendra MAHARJAN
-* Created Date: March 19, 2018
-* Description: Event Information
+/*
+* Written on March 19, 2018
+* Event Information Model
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Rupendra MAHARJAN
 */
 public class Event {
 	

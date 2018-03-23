@@ -1,6 +1,9 @@
-/**
- * @Author : Rupendra maharjan
- */
+/*
+* Written On March 21, 2018
+* Adds category to the list as the user inserts new category
+* Uses the information provided by Category Page designed by Prakash RAI
+* @Author Rupendra MAHARJAN
+*/
 
 $(document).ready(function(){
 	$("#add-category").click(function(){

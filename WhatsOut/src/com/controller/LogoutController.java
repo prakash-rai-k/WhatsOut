@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 
+/*
+ * Written on March 20, 2018
+ * Simple Logout Controller to perform Logout action and invalidate the session
  * @author Rupendra MAHARJAN
- * Date: March 20, 2018
- * Logout Controller
- *
  */
 @WebServlet("/Logout")
 public class LogoutController extends HttpServlet {

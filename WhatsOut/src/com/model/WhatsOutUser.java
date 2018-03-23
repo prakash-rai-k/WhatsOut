@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
-*
-* @author Rupendra MAHARJAN
-* Created On: March 19, 2018
-* Description: WhatsOutUser Information
+/*
+* Written On March 19, 2018
+* WhatsOutUser Information
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Rupendra MAHARJAN
 */
+
 
 public class WhatsOutUser {
 	private int id;

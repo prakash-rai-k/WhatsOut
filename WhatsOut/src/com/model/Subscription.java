@@ -2,13 +2,13 @@ package com.model;
 
 import java.time.LocalDate;
 
-
-/**
-*
-* @author Rupendra MAHARJAN
-* Date: 03/19/2018
-* Description: EventCategory Information
+/*
+* Written On March 19, 2018
+* Event Attended By WhatsOutUser
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Yvan GAKUBA
 */
+
 
 public class Subscription {
 	

@@ -3,12 +3,13 @@ package com.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Rupendra MAHARJAN
- * Date: 03/19/2018
- * Description: EventCategory Information
- */
+/*
+* Written On March 19, 2018
+* EventCategories Available to Users
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Rupendra MAHARJAN
+*/
+
 
 public class EventCategory {
 

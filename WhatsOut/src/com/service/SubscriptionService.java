@@ -7,11 +7,11 @@ import com.dao.EventCategoryDao;
 import com.dao.SubscriptionDao;
 import com.model.EventCategory;
 import com.model.Subscription;
-/**
-*
-* @author Prakash 
-* Created On: March 21,2018 
-* Description: Event controller
+/*
+* Written On March 21, 2018
+* Provides Service to the Subscription
+* Uses DAO Created by Yvan GAKUBA
+* @Author Prakash RAI
 */
 
 

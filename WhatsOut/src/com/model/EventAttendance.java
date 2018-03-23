@@ -2,11 +2,11 @@ package com.model;
 
 import java.time.LocalDate;
 
-/**
-*
-* @author Rupendra MAHARJAN
-* Created On: March 19, 2018
-* Description: Event Attended By WhatsOutUser
+/*
+* Written On March 19, 2018
+* Event Attended By WhatsOutUser
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Rupendra MAHARJAN
 */
 public class EventAttendance {
 	private int id;

@@ -2,11 +2,11 @@ package com.model;
 
 import java.time.LocalDateTime;
 
-/**
- *
- * @author Rupendra MAHARJAN
- * Date: 03/19/2018
- * Description: Comment Information
+/*
+ *Written on March 19, 2018
+ *Model that represents the comments by Users
+ *Designed by Yvan GAKUBA and Prakash RAI
+ * @Author Rupendra MAHARJAN
  */
 
 public class Comment {

@@ -35,6 +35,9 @@ public class HomeController extends HttpServlet {
      * Get method for home page
      * passes eventList in request
      * passes user preferences
+     * Uses the SubscriptionService, and EventService method 
+     * created by Prakash Rai on March 20, 2018
+     * @Author Prakash RAI 
      * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
@@ -48,7 +51,12 @@ public class HomeController extends HttpServlet {
 			SubscriptionService subscriptionService = new SubscriptionService();
 			AddressService addressService = new AddressService();
 			
-			//List all subscribed categories
+			/*
+			 * Written on March 20, 2018
+			 * Enlists all subscriptions of a particular user
+			 * @Author Prakash RAI
+			 * 
+			 */
 			List<String> subscriptionList = wouser.getSubscriptionList().stream()
 					.map(list -> list.getCategory().getName().toString()).distinct().collect(Collectors.toList());
 			List<EventCategory> subscribedCategories = subscriptionService.getSubscribedCategories(wouser.getId());
@@ -56,12 +64,12 @@ public class HomeController extends HttpServlet {
 			List<String> states = addressService.getStateList();
 			List<String> cities = addressService.getCities(wouser.getAddress().getState());
 			
-			for(EventCategory ss : subscribedCategories) {
-				System.out.println(ss);
-			}
-			//Adding categories subscribed by logged in user
-			//Adding events list related to user
-			System.out.println(subscribedCategories.size());
+			/*
+			 * Written on March 20, 2018
+			 *Adds categories subscribed by logged in user 
+			 *Adds events list related to user
+			 *@Author Prakash RAI
+			 */
 			request.setAttribute("subscriptionList", subscriptionList);
 	    	request.setAttribute("categoryList", subscribedCategories);
 	    	request.setAttribute("events", eventService.getAll(wouser.getId()));

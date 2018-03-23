@@ -1,5 +1,9 @@
-<!-- /** * * @author Rupendra MAHARJAN * Date: March 19, 2018 * Description: 
-	Tag Library for Banner and Footer of Each Page */ -->
+<!--
+	Created on March 19, 2018
+	Custom Tag to display Footer on each page
+	Used by the pages created by Prakash RAI
+	@Author Rupendra MAHARJAN 
+-->
 
 <taglib>
 	<tlib-version>1.0</tlib-version>

@@ -1,5 +1,12 @@
 package com.model;
 
+/*
+* Written On March 20, 2018
+* Event Attended By WhatsOutUser
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Yvan GAKUBA
+*/
+
 public class Rating {
 	private int id;
 	private int value;

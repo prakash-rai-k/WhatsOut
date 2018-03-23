@@ -56,7 +56,8 @@
 		<div class="row">
 			<div class="col-md-8">
 				<img src="images/fun.jpg" />
-			</div><!-- col -->
+			</div>
+			<!-- col -->
 
 			<div class="col-md-4">
 				<h2>
@@ -82,10 +83,17 @@
 						<input type="text" class="form-control" name="lastname"
 							placeholder="LastName" required />
 					</div>
-					
+
 					<!-- Display List of States -->
 					<div class="form-group">
-						<select class="custom-select form-control" id="state-drop-down" name="state">
+						<!-- 
+							Displays list of states from database
+							Uses address database created by Yvan GAKUBA 
+							Modified on March 20, 2018 
+							by Rupendra Maharjan 
+						-->
+						<select class="custom-select form-control" id="state-drop-down"
+							name="state">
 							<c:forEach items="${stateList}" var="state">
 								<option>${state}</option>
 							</c:forEach>
@@ -95,10 +103,17 @@
 					</div>
 					<!-- form-group -->
 
-					<!-- Display List of States -->
+					<!-- Display List of Cities -->
 					<div class="form-group">
-						<select class="custom-select form-control" id="city-drop-down" name="city">
-							<!-- Cities are loaded based on state using Ajax  -->
+						<select class="custom-select form-control" id="city-drop-down"
+							name="city">
+							<!-- 
+								Cities are loaded based on State using AJAX 
+								Uses address database created by Yvan GAKUBA
+								Modified on March 20, 2018 
+								by Rupendra Maharjan 
+							-->
+
 						</select>
 					</div>
 					<!-- form-group -->
@@ -148,6 +163,7 @@
 	<!-- container -->
 
 	<script src="js/signup/signup.js">
+		
 	</script>
 </body>
 

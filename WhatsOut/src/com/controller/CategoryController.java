@@ -21,11 +21,6 @@ import com.service.CategoryService;
 import com.service.EventCategoryService;
 import com.service.SubscriptionService;
 
-/*
- * Written on March 19, 2018
- * It creates JSON object of Event Categories
- * @Author Rupendra MAHARJAN
- */
 @WebServlet("/CategoryController")
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,8 +29,10 @@ public class CategoryController extends HttpServlet {
 		super();
 	}
 
-	/*
+	/*Written on March 19, 2018
+	 * Uses CategoryService method created on March 19, 2018
 	 * Returns the JSON object for event categories
+	 * @Author Rupendra MAHARJAN
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -58,67 +55,30 @@ public class CategoryController extends HttpServlet {
 		}
 	}
 
-	/*
+	/* Written on March 19, 2018
 	 * Inserts new category inserted by the user into the database
+	 * and into the subscription database
+	 * Uses EventCategoryService created on March 19, 2018
+	 * @Author Rupendra MAHARJAN 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("category");
-		//redirect to login if there is no usersession
-				if(request.getSession().getAttribute("wouser") == null) {
-					response.sendRedirect("/WhatsOut/Login");
-				}
-				else {
-					System.out.println("session");
-				String newCategory = request.getParameter("category");
-				String newDescription = request.getParameter("description");
-				EventCategory category = new EventCategory(newCategory, newDescription);
-				(new CategoryService()).addCategory(category);
-				WhatsOutUser wouser = (WhatsOutUser) request.getSession().getAttribute("wouser");
-				EventCategoryService service = new EventCategoryService();
-				EventCategory eventCategory = service.getEventCategoryBy(category.getName());
-				SubscriptionService subscriptionService = new SubscriptionService();
-				subscriptionService.addSubscription(new Subscription(LocalDate.now(), wouser, eventCategory));
-				List<EventCategory> subscribedCategories = subscriptionService.getSubscribedCategories(wouser.getId());
-				
-				JSONObject[] arrEvent = new JSONObject[subscribedCategories.size()];
-				int i = 0;
-				for(EventCategory ec : subscribedCategories) {
-					JSONObject res = new JSONObject();
-					res.put("name", ec.getName());
-					arrEvent[i] =res;
-					i++;
-				}
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().println(Arrays.toString(arrEvent));
-				response.getWriter().flush();
-				/*
-				 * JSONObject[] arrEvent = new JSONObject[eventList.size()];
-			int i = 0;
-			
-			//convert list to json array
-			for (Event event : eventList) {
-				JSONObject res = new JSONObject();
-				res.put("id", event.getId());
-				res.put("title", event.getTitle());
-				res.put("logo", event.getLogo());
-				res.put("description", event.getDescription());
-				res.put("createdOn", event.getCreatedOn().toString());
-				res.put("happeningOn", event.getHappeningOn().toString());
-				res.put("endingOn", event.getEndingOn().toString());
-				res.put("capacity", event.getCapacity());
-				res.put("address", event.getAddress().getCity() + ", " + event.getAddress().getState());
-				res.put("eventCreator", event.getEventCreator().getFirstName() + " " + event.getEventCreator().getLastName());
-				arrEvent[i] = res;
-				i++;
-			}
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().println(Arrays.toString(arrEvent));
-			response.getWriter().flush();*/
-				//this.doGet(request, response);
-				}
+		
+		// redirect to login if there is no usersession
+		if (request.getSession().getAttribute("wouser") == null) {
+			response.sendRedirect("/WhatsOut/Login");
+		} else {
+			System.out.println("session");
+			String newCategory = request.getParameter("category");
+			String newDescription = request.getParameter("description");
+			EventCategory category = new EventCategory(newCategory, newDescription);
+			(new CategoryService()).addCategory(category);
+			WhatsOutUser wouser = (WhatsOutUser) request.getSession().getAttribute("wouser");
+			EventCategoryService service = new EventCategoryService();
+			EventCategory eventCategory = service.getEventCategoryBy(category.getName());
+			SubscriptionService subscriptionService = new SubscriptionService();
+			subscriptionService.addSubscription(new Subscription(LocalDate.now(), wouser, eventCategory));
+		}
 	}
 
 }

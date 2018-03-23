@@ -37,7 +37,12 @@ $(document).ready(function(){
 		
 	});
 		
-	// save profiles on saving changes
+	/*
+	* Written On March 21, 2018
+	* Saves the information updated by user using profile page
+	* Uses the Profile page designed by Prakash RAI
+	* @Author Rupendra MAHARJAN
+	*/
 	$('#profile-save').click(function() {
 		var fullname= $('#fullname').val();
 		var email =$('#email').val();

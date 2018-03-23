@@ -24,9 +24,9 @@ import com.service.SubscriptionService;
 import com.service.WhatsOutUserService;
 
 /*
+ * Written on March 21, 2018
+ * Acts on Profile Page and allows the user to modify the page
  * @Author Rupendra MAHARJAN
- * Date: March 21, 2018
- * Profile pages
  */
 
 @WebServlet("/Profile")
@@ -37,6 +37,13 @@ public class ProfileController extends HttpServlet {
 		super();
 	}
 
+	/*
+	 * Written on March 19, 2018
+	 * Gets the details of users and publish them in the page at the beginning
+	 * Uses the session created on LoginController
+	 * Uses the AddressService, CategoryService, SubscriptionService and Event Service
+	 * @Author Rupendra MAHARJAN
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// redirect to login if there is no usersession
@@ -44,26 +51,38 @@ public class ProfileController extends HttpServlet {
 			response.sendRedirect("/WhatsOut/Login");
 		} else {
 			WhatsOutUser woUser = getActiveUser(request, response);
+			
+			/* 
+			 * Process the first, middle and last name into a single full name
+			 * */
 			if (woUser.getMiddleName().isEmpty()) {
 				request.setAttribute("fullname", woUser.getFirstName() + " " + woUser.getLastName());
 			} else {
 				request.setAttribute("fullname",
 						woUser.getFirstName() + " " + woUser.getMiddleName() + " " + woUser.getLastName());
 			}
-			AddressService addressService = new AddressService();
 
-			// State List to Upload the DropDown List
+			/*
+			 * State List to Upload the DropDown List
+			 * */
+			AddressService addressService = new AddressService();
 			request.setAttribute("stateList", addressService.getStateList());
 			String currentState = woUser.getAddress().getState();
 
-			// Displays users current State
+			/* 
+			 * Displays user's current State
+			 * */
 			request.setAttribute("currentState", woUser.getAddress().getState());
 			List<String> cityList = addressService.getAddressListByState(currentState).stream()
 					.map(address -> address.getCity()).collect(Collectors.toList());
 
-			// City List to Upload the DropDown List
+			/*
+			 * City List to Upload the DropDown List
+			 * */
 			request.setAttribute("cityList", cityList);
-			// Displays users current City
+			/*
+			 * Displays user's current City
+			 * */
 			request.setAttribute("currentCity", woUser.getAddress().getCity());
 			request.setAttribute("email", woUser.getEmail());
 			request.setAttribute("phone", woUser.getPhone());
@@ -71,45 +90,23 @@ public class ProfileController extends HttpServlet {
 
 			List<String> categoryList = categoryService.getCategoryList().stream()
 					.map(list -> list.getName().toString()).collect(Collectors.toList());
-			System.out.println("All Categories:" + categoryList);
 			request.setAttribute("categoryList", categoryList);
 
 			SubscriptionService subscriptionService = new SubscriptionService();
 			List<String> subscriptionList = subscriptionService.getSubscriptionList(woUser.getId()).stream()
 					.map(list -> list.getCategory().getName().toString()).distinct().collect(Collectors.toList());
-			System.out.println("SubscriptionList: " + subscriptionList);
 			request.setAttribute("subscriptionList", subscriptionList);
-			
-			WhatsOutUser wouser = (WhatsOutUser) request.getSession().getAttribute("wouser");
-			EventService eventService = new EventService();
-			//SubscriptionService subscriptionService = new SubscriptionService();
-			//AddressService addressService = new AddressService();
-			
-			//List all subscribed categories
-			//List<String> subscriptionList = wouser.getSubscriptionList().stream()
-				//	.map(list -> list.getCategory().getName().toString()).distinct().collect(Collectors.toList());
-			List<EventCategory> subscribedCategories = subscriptionService.getSubscribedCategories(wouser.getId());
-			List<EventCategory> categories = subscriptionService.getEventCategories();
-			List<String> states = addressService.getStateList();
-			List<String> cities = addressService.getCities(wouser.getAddress().getState());
-			
-			for(EventCategory ss : subscribedCategories) {
-				System.out.println(ss);
-			}
-			//Adding categories subscribed by logged in user
-			//Adding events list related to user
-			System.out.println(subscribedCategories.size());
-			request.setAttribute("subscriptionList", subscriptionList);
-	    	request.setAttribute("categoryList", subscribedCategories);
-	    	request.setAttribute("events", eventService.getAll(wouser.getId()));
-	    	request.setAttribute("states", states);
-	    	request.setAttribute("cities", cities);
-	    	request.setAttribute("userState", wouser.getAddress().getState());
-	    	request.setAttribute("userCity", wouser.getAddress().getCity());
-	    	request.setAttribute("categories", categories);
 			request.getServletContext().getRequestDispatcher("/views/profile/profile.jsp").forward(request, response);
 		}
 	}
+	
+	/*
+	 * Written on March 21, 2018
+	 * Receives data from the user and processes it to update user database.
+	 * Uses the model WhatsOutUser, EventCategory and Subscription created on March 19, 2018
+	 * Uses WhatsOutUserService, SubscriptionService and CategoryService
+	 * @Author Rupendra MAHARJAN  
+	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -117,6 +114,10 @@ public class ProfileController extends HttpServlet {
 		if (request.getSession().getAttribute("wouser") == null) {
 			response.sendRedirect("/WhatsOut/Login");
 		} else {
+			
+			/*
+			 * Processes the full name and converts them into first, middle and last name
+			 * */
 			String fullName = request.getParameter("fullname");
 			String[] names = fullName.split("\\s");
 			String firstName = "";
@@ -134,6 +135,10 @@ public class ProfileController extends HttpServlet {
 					middleName += names[i];
 				}
 			}
+			/* 
+			 * Ends the full name processing 
+			 * */
+			
 			String email = request.getParameter("email");
 			String state = request.getParameter("state");
 			String city = request.getParameter("city");
@@ -155,6 +160,9 @@ public class ProfileController extends HttpServlet {
 			List<EventCategory> categoryList = categoryService.getCategoryList();
 			List<Subscription> subscriptionList = woUser.getSubscriptionList();
 
+			/* 
+			 * Adds the subscription to the user's subscription list
+			 * */
 			for (Subscription s : subscriptionList) {
 				subscriptionService.deleteSubscription(s);
 			}
@@ -163,11 +171,18 @@ public class ProfileController extends HttpServlet {
 					subscriptionService.addSubscription(new Subscription(LocalDate.now(), woUser, category));
 				}
 			}
+			
+			/*
+			 *  Ends the addition of subscription process
+			 *  */
 			userService.updateProfile(modifiedUser);
 			request.getSession(false).setAttribute("wouser", modifiedUser);
 		}
 	}
 
+	/* 
+	 * Returns the current user in the session
+	 * */
 	public WhatsOutUser getActiveUser(HttpServletRequest request, HttpServletResponse response) {
 		WhatsOutUser woUser = (WhatsOutUser) request.getSession(false).getAttribute("wouser");
 		return woUser;

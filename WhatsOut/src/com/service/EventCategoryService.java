@@ -3,21 +3,25 @@ package com.service;
 import com.dao.EventCategoryDao;
 import com.model.EventCategory;
 
-/**
-*
-* @author Prakash 
-* Created On: March 20,2018 
-* Description: Event category Service
-*/
-
 public class EventCategoryService {
 	EventCategoryDao dao = new EventCategoryDao();
 	
-	//get eventcategory by id
+	/*
+	* Written On March 21, 2018
+	* Get Event Category By Event Id
+	* Uses DAO Created by Yvan GAKUBA
+	* @Author Prakash RAI
+	*/
 	public EventCategory getEventCategoryBy(int id) {
 		return dao.findBy(id);
 	}
 	
+	/*
+	* Written On March 21, 2018
+	* Get Event Category by Name
+	* Uses DAO Created by Yvan GAKUBA
+	* @Author Prakash RAI
+	*/
 	public EventCategory getEventCategoryBy(String name) {
 		return dao.findBy(name);
 	}

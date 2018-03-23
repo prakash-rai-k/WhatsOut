@@ -1,10 +1,10 @@
 package com.model;
 
-/**
-*
+/*
+* Written on March 19, 2018
+* Address Of User or Event being held
+* Written on the basis of design proposed by Yvan GAKUBA and Prakash RAI 
 * @author Rupendra MAHARJAN
-* Created On: March 19, 2018
-* Description: Address Of User or Event being held 
 */
 
 public class Address {

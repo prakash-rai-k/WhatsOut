@@ -17,8 +17,10 @@ import com.service.AddressService;
 
 /*
  * Written on March 19, 2018
- * It creates JSON object for User Address
+ * Creates JSON object for User Address
+ * Uses the service written by Rupendra MAHARJAN on March 19, 2018
  * @Author Rupendra MAHARJAN
+ * 
  */
 @WebServlet("/AddressController")
 public class AddressController extends HttpServlet {

@@ -1,7 +1,11 @@
-//@author Rupendra MAHARJAN
-//Date: March 20,2018
-//
-//This function changes city list based on the selection of state
+/*
+* Written On March 20, 2018
+* Changes the city list based on the state selected by user.
+* Uses the information from Address Database created by Yvan GAKUBA
+* Uses the Sign Up page created by Prakash RAI to send and display the data to user
+* @Author Rupendra MAHARJAN
+*/
+
 
 $(document).ready(function(){
 	$('#state-drop-down').on("change",function(){
@@ -27,7 +31,11 @@ $(document).ready(function(){
 	}
 });
 
-//Used for form validation using jquery validation
+/*
+* Written On March 21, 2018
+* Form Validation using jquery-validation 
+* @Author Rupendra MAHARJAN
+*/
 $('#signup-form').validate({
 	//Rules defined for Page Validation
 	rules : {

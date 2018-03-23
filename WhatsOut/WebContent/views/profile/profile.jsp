@@ -96,10 +96,16 @@
 								<div class="form-group row">
 									<label for="address" class="col-sm-3 col-form-label">State</label>
 									<div class="col-sm-9">
+									
+									<!-- 
+										Displays list of states from database
+										Uses address database created by Yvan GAKUBA 
+										Modified on March 20, 2018 
+										by Rupendra Maharjan 
+									-->
 										<select class="custom-select form-control"
 											id="state-drop-down" name="state">
 											<c:forEach items="${stateList}" var="state">
-
 												<c:if test="${state==currentState}">
 													<option selected>${currentState}</option>
 												</c:if>
@@ -107,14 +113,20 @@
 													<option>${state}</option>
 												</c:if>
 											</c:forEach>
-
 										</select>
+									<!-- Modification part Terminated -->
 									</div>
 								</div>
 
 								<div class="form-group row">
 									<label for="address" class="col-sm-3 col-form-label">City</label>
 									<div class="col-sm-9">
+									<!-- 
+										Displays list of cities based on state
+										Uses Database created by Yvan GAKUBA 
+										Modified on March 20, 2018 
+										by Rupendra Maharjan 
+									-->
 										<select class="custom-select form-control" id="city-drop-down"
 											name="city">
 											<c:forEach items="${cityList}" var="city">
@@ -124,6 +136,7 @@
 
 											</c:forEach>
 										</select>
+										<!-- Modification for city display Completed -->
 									</div>
 								</div>
 

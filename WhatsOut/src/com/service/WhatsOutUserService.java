@@ -4,12 +4,11 @@ import com.dao.SubscriptionDao;
 import com.dao.WhatsOutUserDao;
 import com.model.Subscription;
 import com.model.WhatsOutUser;
-
-/**
-*
-* @author Rupendra MAHARJAN 
-* Created On: March 20,2018 
-* Description: Service related to User Information
+/*
+* Written On March 19, 2018
+* Get Event Category By Event Id
+* Uses DAO Created by Yvan GAKUBA
+* @Author Rupendra MAHARJAN
 */
 public class WhatsOutUserService {
 	private WhatsOutUserDao userDao;
@@ -20,6 +19,7 @@ public class WhatsOutUserService {
 		sDao = new SubscriptionDao();
 	}
 	
+	//Returns User based on Username and Password
 	public WhatsOutUser getUserbyLogin(String username, String password) {
 		WhatsOutUser user = userDao.findBy(username, password);
 		for (Subscription s : sDao.get(user.getId())) {
@@ -28,10 +28,12 @@ public class WhatsOutUserService {
 		return user;
 	}
 
+	//Registers newly Signed Up User
 	public boolean registerUser(WhatsOutUser wouser) {
 		return userDao.insert(wouser);
 	}
 	
+	//Updates the profile of the user based on entries made on Profile page
 	public boolean updateProfile(WhatsOutUser user) {
 		return userDao.update(user);
 	}

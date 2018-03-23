@@ -14,6 +14,12 @@ import com.model.WhatsOutUser;
 import com.service.AddressService;
 import com.service.WhatsOutUserService;
 
+/*
+ * Written on March 19, 2018
+ * Gathers the user information from the page and push it to database for future use.
+ * Uses WhatsOutService and AddressService 
+ * @Author Rupendra MAHARJAN
+ */
 @WebServlet("/Signup")
 public class SignupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,15 +27,21 @@ public class SignupController extends HttpServlet {
     public SignupController() {
         super();
     }
-
+    
+    /* 
+     * Loads the Sign Up page with the state list 
+     * and city list based on the state entered by user
+     * */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AddressService addressService = new AddressService();
 		request.setAttribute("stateList",addressService.getStateList());
 		request.getServletContext().getRequestDispatcher("/views/signup/signup.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("here");		
+	
+	/* 
+	 * Collects the user information entered by the user
+	 * */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 			String firstName = request.getParameter("firstname");
 			String middleName = request.getParameter("middlename");
 			String lastName = request.getParameter("lastname");
@@ -40,22 +52,25 @@ public class SignupController extends HttpServlet {
 			String userName =  request.getParameter("username");
 			String password = request.getParameter("password");
 			
-			//String password = Base64.encode(request.getParameter("password").getBytes()).toString();
 			WhatsOutUser currentUser = new WhatsOutUser(0,userName, password, firstName, lastName, middleName,
 					email,phone,"", LocalDate.now(),new AddressService().getAddress(state, city));
 			
 			System.out.println(currentUser);
 			
-			//Redirect user to home page if successfull
+			/* 
+			 * Redirects user to the homepage in case of successful sign up
+			 * */
 			WhatsOutUserService woService = new WhatsOutUserService(); 
 			if(woService.registerUser(currentUser)) {
 				request.getSession().setAttribute("wouser",woService.getUserBy(userName));
-				//Cookie cookie= new Cookie("wouser",request.getSession().getId());
-				//response.addCookie(cookie);
+				Cookie cookie= new Cookie("wouser",request.getSession().getId());
+				response.addCookie(cookie);
 				request.getRequestDispatcher("./Home").forward(request, response);
 			}
 			
-			//Redirect user to sinup page if fail
+			/* 
+			 * Redirects user to the same page in case of failure
+			 * */
 			else {
 				response.sendRedirect("/Signup");
 			}

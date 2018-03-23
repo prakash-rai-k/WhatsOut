@@ -1,11 +1,12 @@
 package com.model;
 
-/**
-*
-* @author Rupendra MAHARJAN
-* Created Date: March 19, 2018
-* Description: Event Information
+/*
+* Written On March 19, 2018
+* Picture Gallery to upload pictures related to Project
+* Designed by Yvan GAKUBA and Prakash RAI
+* @Author Rupendra MAHARJAN
 */
+
 public class PictureGallery {
 	private int id;
 	private String path;
