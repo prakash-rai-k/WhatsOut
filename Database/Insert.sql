@@ -3,7 +3,7 @@
 -- Create date: 03/18/2018
 -- Description: Start up dummy data for database
 -- 
-use BookSharing;
+use BookSharing; --sss
 
 -- Create new Organizer ---------------------------------------------------------------------------------
 INSERT INTO Organizer(organizer_name, description, address, logo, email, phone, organizer_status, username, password, register_date) 
