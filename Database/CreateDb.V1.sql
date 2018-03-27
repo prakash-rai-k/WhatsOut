@@ -5,7 +5,7 @@
 -- ===================================================================================
 
 -- 1. Create database if not exist---------------------------------------------------
-CREATE DATABASE IF NOT EXISTS WhatsOut;
+CREATE DATABASE IF NOT EXISTS WhatsOut; --hello
 
 -- 2. Create Organizer table----------------------------------------------------------
 USE WhatsOut;
